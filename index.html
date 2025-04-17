@@ -10,6 +10,7 @@
       --secondary: #10b981;
       --dark: #18181b;
       --light: #f8fafc;
+      --accent: #8b5cf6;
     }
     
     * {
@@ -37,6 +38,7 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
+      overflow: hidden;
     }
     
     .particles {
@@ -52,16 +54,30 @@
     .introduction {
       position: relative;
       z-index: 1;
+      animation: fadeIn 1s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
       margin-bottom: 1rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       display: inline-block;
+      animation: gradient 3s linear infinite;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
     }
     
     .role-text {
@@ -71,6 +87,17 @@
       white-space: nowrap;
       margin: 0;
       opacity: 0.9;
+      position: relative;
+    }
+    
+    .role-text::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
     
     .description {
@@ -99,6 +126,26 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+    
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
     
     .btn-primary {
@@ -147,11 +194,15 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     
     .skill-item:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+      border-color: var(--secondary);
     }
     
     .section {
@@ -161,11 +212,13 @@
     .section-title {
       font-size: 2.5rem;
       margin-bottom: 2rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       display: inline-block;
+      animation: gradient 3s linear infinite;
     }
     
     .timeline {
@@ -178,11 +231,11 @@
       content: '';
       position: absolute;
       width: 3px;
-      background: var(--primary);
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
       top: 0;
       bottom: 0;
       left: 15px;
-      opacity: 0.4;
+      opacity: 0.6;
     }
     
     .timeline-item {
@@ -209,6 +262,13 @@
       border-radius: 50%;
       z-index: 1;
       top: 5px;
+      box-shadow: 0 0 10px var(--secondary);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .timeline-item:hover::before {
+      transform: scale(1.3);
+      box-shadow: 0 0 20px var(--secondary);
     }
     
     .timeline-date {
@@ -228,7 +288,6 @@
       margin-bottom: 1rem;
     }
     
-    /* Projects Section */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -247,6 +306,25 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover::before {
+      transform: scaleX(1);
     }
     
     .project-card.visible {
@@ -255,8 +333,9 @@
     }
     
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.2);
+      background: rgba(255,255,255,0.08);
     }
     
     .project-content {
@@ -293,9 +372,14 @@
       border-radius: 20px;
       font-size: 0.8rem;
       white-space: nowrap;
+      transition: all 0.3s ease;
     }
     
-    /* Contact Section */
+    .tech-tag:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    
     .contact-form {
       max-width: 600px;
       margin: 0 auto;
@@ -303,6 +387,13 @@
       padding: 2rem;
       border-radius: 12px;
       backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .contact-form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
     }
     
     .form-group {
@@ -329,7 +420,7 @@
     .form-input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
     }
     
     textarea.form-input {
@@ -337,146 +428,16 @@
       resize: vertical;
     }
     
-    /* Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .modal-content {
-      background: var(--dark);
-      border-radius: 12px;
-      padding: 2rem;
-      width: 90%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      transform: translateY(-20px);
-      transition: transform 0.3s ease;
-    }
-    
-    .modal.active .modal-content {
-      transform: translateY(0);
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--light);
-      font-size: 1.5rem;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
-    }
-    
-    .modal-close:hover {
-      opacity: 1;
-    }
-    
-    /* Nav menu for smaller screens */
-    .nav-toggle {
-      display: none;
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.1);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      z-index: 100;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-    }
-    
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 300px;
-      height: 100vh;
-      background: rgba(24, 24, 27, 0.95);
-      backdrop-filter: blur(10px);
-      z-index: 99;
-      padding: 5rem 2rem 2rem;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .nav-menu.active {
-      transform: translateX(0);
-    }
-    
-    .nav-links {
-      list-style: none;
-    }
-    
-    .nav-link {
-      display: block;
-      padding: 1rem 0;
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--light);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      transition: color 0.3s ease;
-    }
-    
-    .nav-link:hover {
-      color: var(--secondary);
-    }
-    
     @keyframes scrollSkills {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      
-      .role-text {
-        font-size: 1.5rem;
-      }
-      
-      .description {
-        font-size: 1rem;
-      }
-      
-      .nav-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
+      h1 { font-size: 2.5rem; }
+      .role-text { font-size: 1.5rem; }
+      .description { font-size: 1rem; }
+      .section-title { font-size: 2rem; }
     }
   </style>
 </head>
@@ -518,38 +479,31 @@
       <h2 class="section-title">Experience</h2>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-date">Mar 2025 - Present</div>
-          <h3 class="timeline-title">Python Developer</h3>
+          <div class="timeline-date">Apr 2025 - Present</div>
+          <h3 class="timeline-title">Founding Team Member and Python Developer</h3>
           <div class="timeline-company">EQUILIBRATE Pvt. Ltd</div>
-          <p>Developed AI-powered chatbot using LangChain, Ollama, and Gemini. Implemented RAG system reducing hallucination by 40%.</p>
+          <p>Architected an AI chatbot using LangChain, Gemini, and LLaMA. Implemented RAG system reducing hallucinations by 40%. Integrated MongoDB Atlas with vector indexing for semantic search.</p>
         </div>
         
         <div class="timeline-item">
-          <div class="timeline-date">Feb 2025 - Present</div>
+          <div class="timeline-date">Mar 2025 - May 2025</div>
           <h3 class="timeline-title">AI/ML Intern</h3>
           <div class="timeline-company">Zephyra</div>
-          <p>Achieved 92% speech-to-text accuracy using Wav2Vec2.0 and developed AI-driven pronunciation analyzer with 88% phoneme-level accuracy.</p>
+          <p>Achieved 92% speech-to-text accuracy using Wav2Vec2.0 for autism therapy. Built phoneme analyzer with 88% accuracy using Coqui TTS/VITS.</p>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-date">Feb 2025 - Apr 2025</div>
           <h3 class="timeline-title">Machine Learning Intern</h3>
           <div class="timeline-company">UnifiedMentor</div>
-          <p>Worked on AI/ML projects like Heart Disease Prediction and Vehicle Price Prediction using data-driven approaches.</p>
+          <p>Built ML models (Random Forest, XGBoost, Logistic Regression) for predictive analytics. Improved model accuracy by 10%+ via RandomizedSearchCV tuning.</p>
         </div>
         
         <div class="timeline-item">
-          <div class="timeline-date">Sep 2024 - Oct 2024</div>
-          <h3 class="timeline-title">Software Testing Engineer Intern</h3>
-          <div class="timeline-company">Peoplebox.ai</div>
-          <p>Developed and automated 50+ test cases using Playwright, decreasing manual testing effort by 45%.</p>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="timeline-date">Jan 2024 - Apr 2024</div>
-          <h3 class="timeline-title">Software Development Intern (AI/ML & Robotics)</h3>
-          <div class="timeline-company">Emage Soft Pvt Ltd</div>
-          <p>Optimized RPLIDAR A1M8 integration with RViz and Hector SLAM, improving real-time mapping accuracy by 35%.</p>
+          <div class="timeline-date">Nov 2024 - Feb 2025</div>
+          <h3 class="timeline-title">AI Research Intern</h3>
+          <div class="timeline-company">Coding Jr</div>
+          <p>Built and validated AI prototypes for real-world use cases. Designed experiments and tested models for performance and feasibility.</p>
         </div>
       </div>
     </section>
@@ -559,32 +513,30 @@
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-content">
-            <h3 class="project-title">AI-Powered Resume & Job Match Analyzer</h3>
+            <h3 class="project-title">AI-Powered Resume Analyzer</h3>
             <p class="project-description">
-              Developed an AI-driven resume and job matching system using NLP and machine learning, achieving over 90% accuracy. Implemented multi-resume processing with bulk uploads, reducing manual screening time by 70%.
+              Developed an AI-driven resume and job matching system using NLP and machine learning, achieving over 90% accuracy. Reduced manual screening time by 70%.
             </p>
             <div class="project-tech">
               <span class="tech-tag">Python</span>
               <span class="tech-tag">NLP</span>
-              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">ML</span>
               <span class="tech-tag">spaCy</span>
-              <span class="tech-tag">Streamlit</span>
             </div>
           </div>
         </div>
         
         <div class="project-card">
           <div class="project-content">
-            <h3 class="project-title">Employee Attrition Prediction for HR Analytics</h3>
+            <h3 class="project-title">Talk2Code Voice-Driven Code Generation</h3>
             <p class="project-description">
-              Built a predictive ML model to analyze employee attrition trends using classification algorithms. Achieved 85% model accuracy, outperforming baseline models by 18% through hyperparameter tuning.
+              Constructed a local AI system with Whisper and GPT4All for real-time speech-to-code translation. Designed an NLP pipeline for noisy audio processing.
             </p>
             <div class="project-tech">
               <span class="tech-tag">Python</span>
-              <span class="tech-tag">scikit-learn</span>
-              <span class="tech-tag">Data Analysis</span>
-              <span class="tech-tag">Classification</span>
-              <span class="tech-tag">Dashboard</span>
+              <span class="tech-tag">LLMs</span>
+              <span class="tech-tag">Audio ML</span>
+              <span class="tech-tag">NLP</span>
             </div>
           </div>
         </div>
@@ -597,7 +549,7 @@
         <form id="contactForm">
           <div class="form-group">
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" class="form-input" placeholder="Your name" required>
+            <input type="text" id="contactName" class="form-input" placeholder="Your name" required>
           </div>
           
           <div class="form-group">
@@ -616,99 +568,122 @@
     </section>
   </div>
   
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal">&times;</button>
-      <h2 class="project-title">Message Sent!</h2>
-      <p>Thank you for your message. I'll get back to you as soon as possible.</p>
-    </div>
-  </div>
-  
-  <button class="nav-toggle" id="navToggle">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
-  
-  <nav class="nav-menu" id="navMenu">
-    <ul class="nav-links">
-      <li><a href="#" class="nav-link">Home</a></li>
-      <li><a href="#experience" class="nav-link">Experience</a></li>
-      <li><a href="#projects" class="nav-link">Projects</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-    </ul>
-  </nav>
-
   <script>
     // Typewriter effect for role
-    function typeWriter(text, element, speed = 100) {
-      let i = 0;
-      const roles = ["AI/ML Engineer", "Python Developer", "Software Engineer"];
+    function typeWriter() {
+      const roles = ["AI/ML Engineer", "Data Science Expert", "Software Engineer"];
       let roleIndex = 0;
+      let charIndex = 0;
+      let roleElement = document.getElementById('role');
+      let isDeleting = false;
+      let typingSpeed = 100;
       
       function type() {
-        if (i < roles[roleIndex].length) {
-          element.textContent += roles[roleIndex].charAt(i);
-          i++;
-          setTimeout(type, speed);
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+          roleElement.textContent = currentRole.substring(0, charIndex - 1);
+          charIndex--;
+          typingSpeed = 50;
         } else {
-          setTimeout(erase, speed * 20);
+          roleElement.textContent = currentRole.substring(0, charIndex + 1);
+          charIndex++;
+          typingSpeed = 100;
         }
-      }
-      
-      function erase() {
-        if (i > 0) {
-          element.textContent = roles[roleIndex].substring(0, i-1);
-          i--;
-          setTimeout(erase, speed/2);
-        } else {
+        
+        if (!isDeleting && charIndex === currentRole.length) {
+          isDeleting = true;
+          typingSpeed = 1000;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
           roleIndex = (roleIndex + 1) % roles.length;
-          setTimeout(type, speed*2);
+          typingSpeed = 200;
         }
+        
+        setTimeout(type, typingSpeed);
       }
       
       type();
     }
     
-    // Particle animation
+    // Advanced particle animation
     function setupParticles() {
       const canvas = document.getElementById('particles');
       const ctx = canvas.getContext('2d');
+      
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
       let particlesArray = [];
-      const numberOfParticles = 100;
+      let hue = 0;
+      const numberOfParticles = window.innerWidth < 600 ? 50 : 100;
+      const mouse = {
+        x: undefined,
+        y: undefined,
+        radius: 150
+      };
+      
+      window.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+      });
       
       class Particle {
         constructor() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
           this.size = Math.random() * 3 + 1;
-          this.speedX = Math.random() * 1 - 0.5;
-          this.speedY = Math.random() * 1 - 0.5;
-          this.color = Math.random() > 0.5 ? '#2563eb' : '#10b981';
-          this.opacity = Math.random() * 0.5 + 0.1;
+          this.speedX = Math.random() * 2 - 1;
+          this.speedY = Math.random() * 2 - 1;
+          this.color = `hsl(${Math.random() * 60 + 200}, 70%, 50%)`;
         }
         
         update() {
           this.x += this.speedX;
           this.y += this.speedY;
           
+          // Boundary check
           if (this.x > canvas.width) this.x = 0;
           if (this.x < 0) this.x = canvas.width;
           if (this.y > canvas.height) this.y = 0;
           if (this.y < 0) this.y = canvas.height;
+          
+          // Mouse interaction
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            const angle = Math.atan2(dy, dx);
+            this.speedX -= Math.cos(angle) * 0.1;
+            this.speedY -= Math.sin(angle) * 0.1;
+          }
         }
         
         draw() {
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = this.opacity;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
           ctx.fill();
+        }
+      }
+      
+      function connect() {
+        for (let a = 0; a < particlesArray.length; a++) {
+          for (let b = a; b < particlesArray.length; b++) {
+            const dx = particlesArray[a].x - particlesArray[b].x;
+            const dy = particlesArray[a].y - particlesArray[b].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 120) {
+              ctx.beginPath();
+              ctx.strokeStyle = `hsla(240, 70%, 50%, ${1 - distance/120})`;
+              ctx.lineWidth = 0.2;
+              ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+              ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+              ctx.stroke();
+            }
+          }
         }
       }
       
@@ -725,6 +700,8 @@
           particlesArray[i].update();
           particlesArray[i].draw();
         }
+        connect();
+        hue++;
         requestAnimationFrame(animate);
       }
       
@@ -743,99 +720,37 @@
       const timeline = document.querySelectorAll('.timeline-item');
       const projectCards = document.querySelectorAll('.project-card');
       
-      function checkScroll() {
-        const elements = [...timeline, ...projectCards];
-        elements.forEach(item => {
-          const itemPosition = item.getBoundingClientRect().top;
-          const screenPosition = window.innerHeight / 1.3;
-          
-          if (itemPosition < screenPosition) {
-            item.classList.add('visible');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
           }
         });
-      }
-      
-      window.addEventListener('scroll', checkScroll);
-      checkScroll();
-    }
-    
-    // Form submission
-    function setupContactForm() {
-      const contactForm = document.getElementById('contactForm');
-      const successModal = document.getElementById('successModal');
-      const closeModal = document.getElementById('closeModal');
-      
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Here you would normally add code to send the form data to your server
-        // For now, we'll just show the success modal
-        successModal.classList.add('active');
-        contactForm.reset();
+      }, {
+        threshold: 0.1
       });
       
-      closeModal.addEventListener('click', function() {
-        successModal.classList.remove('active');
-      });
-      
-      // Close modal when clicking outside
-      window.addEventListener('click', function(e) {
-        if (e.target === successModal) {
-          successModal.classList.remove('active');
-        }
-      });
-    }
-    
-    // Mobile navigation
-    function setupMobileNav() {
-      const navToggle = document.getElementById('navToggle');
-      const navMenu = document.getElementById('navMenu');
-      const navLinks = document.querySelectorAll('.nav-link');
-      
-      navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-      });
-      
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          navMenu.classList.remove('active');
-        });
-      });
-    }
-    
-    // Smooth scrolling
-    function setupSmoothScrolling() {
-      const links = document.querySelectorAll('a[href^="#"]');
-      
-      links.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
-          
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 100,
-              behavior: 'smooth'
-            });
-          }
-        });
+      [...timeline, ...projectCards].forEach(item => {
+        observer.observe(item);
       });
     }
     
     // Initialize all functions
-    document.addEventListener('DOMContentLoaded', function() {
-      typeWriter("", document.getElementById('role'));
+    window.addEventListener('DOMContentLoaded', function() {
+      typeWriter();
       setupParticles();
       animateElements();
-      setupContactForm();
-      setupMobileNav();
-      setupSmoothScrolling();
       
       // Clone skills for infinite scroll effect
       const skillsTrack = document.getElementById('skills-track');
       skillsTrack.innerHTML += skillsTrack.innerHTML;
+      
+      // Form handling
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        this.reset();
+      });
     });
   </script>
 </body>
