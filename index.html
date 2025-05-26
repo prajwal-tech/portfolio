@@ -380,52 +380,112 @@
       transform: translateY(-3px);
     }
     
-    .contact-form {
+    .contact-section {
+      text-align: center;
       max-width: 600px;
       margin: 0 auto;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .contact-item {
       background: rgba(255,255,255,0.05);
       padding: 2rem;
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.1);
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
-    .contact-form:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    
-    .form-input {
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      padding: 0.75rem 1rem;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      color: var(--light);
-      font-size: 1rem;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .contact-item:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+      background: rgba(255,255,255,0.08);
+    }
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
       transition: all 0.3s ease;
     }
     
-    .form-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    .contact-item:hover .contact-icon {
+      transform: scale(1.1);
+      color: var(--primary);
     }
     
-    textarea.form-input {
-      min-height: 150px;
-      resize: vertical;
+    .contact-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+    
+    .contact-value {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+    
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .contact-link:hover::before {
+      left: 100%;
+    }
+    
+    .contact-link:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
     }
     
     @keyframes scrollSkills {
@@ -438,6 +498,10 @@
       .role-text { font-size: 1.5rem; }
       .description { font-size: 1rem; }
       .section-title { font-size: 2rem; }
+      .contact-info { gap: 1.5rem; }
+      .contact-item { padding: 1.5rem; }
+      .contact-icon { font-size: 2rem; }
+      .contact-value { font-size: 1.2rem; }
     }
   </style>
 </head>
@@ -545,26 +609,31 @@
     </section>
     
     <section id="contact" class="section">
-      <h2 class="section-title">Contact Me</h2>
-      <div class="contact-form">
-        <form id="contactForm">
-          <div class="form-group">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="contactName" class="form-input" placeholder="Your name" required>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-section">
+        <p class="description" style="text-align: center; margin-bottom: 0;">
+          Ready to collaborate on innovative AI/ML projects? Let's connect and turn ideas into reality.
+        </p>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">prajwalnagesh73@gmail.com</div>
+            <a href="mailto:prajwalnagesh73@gmail.com" class="contact-link">
+              <span>Send Email</span>
+            </a>
           </div>
           
-          <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-input" placeholder="Your email" required>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+918197180393</div>
+            <a href="tel:+918197180393" class="contact-link">
+              <span>Call Now</span>
+            </a>
           </div>
-          
-          <div class="form-group">
-            <label for="message" class="form-label">Message</label>
-            <textarea id="message" class="form-input" placeholder="Your message" required></textarea>
-          </div>
-          
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
+        </div>
       </div>
     </section>
   </div>
@@ -720,6 +789,7 @@
     function animateElements() {
       const timeline = document.querySelectorAll('.timeline-item');
       const projectCards = document.querySelectorAll('.project-card');
+      const contactItems = document.querySelectorAll('.contact-item');
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -731,7 +801,7 @@
         threshold: 0.1
       });
       
-      [...timeline, ...projectCards].forEach(item => {
+      [...timeline, ...projectCards, ...contactItems].forEach(item => {
         observer.observe(item);
       });
     }
@@ -745,13 +815,6 @@
       // Clone skills for infinite scroll effect
       const skillsTrack = document.getElementById('skills-track');
       skillsTrack.innerHTML += skillsTrack.innerHTML;
-      
-      // Form handling
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your message! I will get back to you soon.');
-        this.reset();
-      });
     });
   </script>
 </body>
