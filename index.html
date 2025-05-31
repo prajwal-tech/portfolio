@@ -212,6 +212,7 @@
     .section-title {
       font-size: 2.5rem;
       margin-bottom: 2rem;
+      text-align: center;
       background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -219,6 +220,7 @@
       color: transparent;
       display: inline-block;
       animation: gradient 3s linear infinite;
+      width: 100%;
     }
     
     .timeline {
@@ -502,6 +504,19 @@
       .contact-item { padding: 1.5rem; }
       .contact-icon { font-size: 2rem; }
       .contact-value { font-size: 1.2rem; }
+      .timeline { padding: 0 1rem; }
+      .timeline-item { padding-left: 35px; }
+      .timeline::after { left: 12px; }
+      .timeline-item::before { left: 4px; }
+      .cta-buttons { 
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -513,7 +528,7 @@
         <h1 id="name">Prajwal N.A</h1>
         <p class="role-text" id="role"></p>
         <p class="description">
-          Electronics & Communication Engineer with a minor in Computer Science, specializing in AI, ML, Data Science, and Software Development.Turning Data Into Scalable Solutions.
+          Electronics & Communication Engineer with a minor in Computer Science, specializing in AI, ML, Data Science, and Software Development. Turning Data Into Scalable Solutions.
         </p>
         <div class="cta-buttons">
           <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -535,7 +550,7 @@
           <div class="skill-item">Django</div>
           <div class="skill-item">Docker</div>
           <div class="skill-item">Robotics</div>
-          <div class="skill-item">Rag</div>
+          <div class="skill-item">RAG</div>
         </div>
       </div>
     </header>
@@ -563,23 +578,19 @@
           <div class="timeline-company">Coding Jr</div>
           <p>Built and validated AI prototypes for real-world use cases. Designed experiments and tested models for performance and feasibility.</p>
         </div>
-      </div>
-    </section>
-
+        
         <div class="timeline-item">
           <div class="timeline-date">Sep 2024 - Oct 2024</div>
           <h3 class="timeline-title">Software Testing Engineer Intern</h3>
           <div class="timeline-company">Peoplebox.ai</div>
           <p>Automated 50+ tests with Playwright, reducing manual QA workload by 45% and embedding scripts into CI/CD pipelines to cut regression time by 30%.</p>
         </div>
-      </div>
-    </section>
-  
+        
         <div class="timeline-item">
           <div class="timeline-date">Jan 2024 - Apr 2024</div>
-          <h3 class="timeline-title"> Software Development Intern (AI/ML & Robotics)</h3>
+          <h3 class="timeline-title">Software Development Intern (AI/ML & Robotics)</h3>
           <div class="timeline-company">Emage Soft Pvt Ltd</div>
-          <p> Enhanced mapping accuracy by 35% via LIDAR-IMU fusion and Hector SLAM tuning; validated with 98% precision on KITTI.</p>
+          <p>Enhanced mapping accuracy by 35% via LIDAR-IMU fusion and Hector SLAM tuning; validated with 98% precision on KITTI.</p>
         </div>
       </div>
     </section>
@@ -652,7 +663,7 @@
   <script>
     // Typewriter effect for role
     function typeWriter() {
-      const roles = ["AI/ML Engineer", "Data Scientist ", "Software Developer"];
+      const roles = ["AI/ML Engineer", "Data Scientist", "Software Developer"];
       let roleIndex = 0;
       let charIndex = 0;
       let roleElement = document.getElementById('role');
