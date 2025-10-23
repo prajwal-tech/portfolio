@@ -1,7 +1,8 @@
 # portfolio
 
 PRAJWAL.N.A
- Software Engineer | AI/ML & Data | From Code to Insight
+ 
+Software Engineer | AI/ML & Data | From Code to Insight
 
 🔥 Passionate about transforming complex data into actionable intelligence.
 🧠 "Code is just the beginning insight is the destination."
