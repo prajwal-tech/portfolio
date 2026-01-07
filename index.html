@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prajwal N.A</title>
+  <title>Prajwal N.A - AI/ML Engineer & Software Developer</title>
+  <meta name="description" content="Portfolio of Prajwal N.A, an Electronics & Communication Engineer specializing in AI, ML, Data Science, and Software Development. Turning Data Into Scalable Solutions.">
+  <meta name="keywords" content="AI Engineer, Machine Learning, Software Developer, Python, TensorFlow, PyTorch, Data Science">
+  <meta name="author" content="Prajwal N.A">
+  <meta property="og:title" content="Prajwal N.A - AI/ML Engineer & Software Developer">
+  <meta property="og:description" content="Portfolio showcasing expertise in AI, ML, and software development with real-world projects and achievements.">
+  <meta property="og:image" content="https://example.com/portfolio-preview.jpg">
+  <meta property="og:url" content="https://prajwalna.dev">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
     
@@ -15,6 +24,16 @@
       --accent-3: #ec4899;
       --text-light: #f0f4f8;
       --text-dim: #94a3b8;
+    }
+    
+    [data-theme="light"] {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --accent-1: #0ea5e9;
+      --accent-2: #7c3aed;
+      --accent-3: #ec4899;
+      --text-light: #1e293b;
+      --text-dim: #64748b;
     }
     
     * {
@@ -31,6 +50,34 @@
       line-height: 1.6;
     }
     
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      z-index: 101;
+      transition: width 0.3s ease;
+    }
+    
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--accent-1);
+      color: var(--bg-dark);
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 102;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 6px;
+    }
+    
     .nav {
       position: fixed;
       top: 0;
@@ -41,6 +88,11 @@
       padding: 1rem 2rem;
       border-bottom: 1px solid rgba(0, 245, 255, 0.1);
       transition: all 0.3s;
+    }
+    
+    [data-theme="light"] .nav {
+      background: rgba(248, 250, 252, 0.9);
+      border-bottom: 1px solid rgba(14, 165, 233, 0.1);
     }
     
     .nav-content {
@@ -87,6 +139,29 @@
     
     .nav-links a:hover::after {
       width: 100%;
+    }
+    
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .theme-toggle:hover {
+      background: rgba(0, 245, 255, 0.1);
+      transform: scale(1.1);
+    }
+    
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(14, 165, 233, 0.1);
     }
     
     .hero {
@@ -148,20 +223,35 @@
       height: 60px;
       overflow: hidden;
       margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
     }
     
     .role {
       font-size: 2rem;
       font-weight: 600;
       color: var(--accent-1);
-      animation: slideUp 8s infinite;
+      border-right: 2px solid var(--accent-1);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
     }
     
-    @keyframes slideUp {
-      0%, 30% { transform: translateY(0); }
-      33%, 63% { transform: translateY(-60px); }
-      66%, 96% { transform: translateY(-120px); }
-      100% { transform: translateY(-180px); }
+    .cursor {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent-1);
+      animation: blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--accent-1); }
     }
     
     .hero-text p {
@@ -212,12 +302,28 @@
       transform: translateY(-3px);
     }
     
+    .btn-secondary {
+      background: var(--accent-2);
+      color: var(--bg-dark);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--accent-3);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+    }
+    
     .skills-showcase {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
       margin-top: 2rem;
-      animation: fadeInUp 0.8s ease 0.6s both;
     }
     
     .skill-card {
@@ -228,7 +334,23 @@
       border: 1px solid rgba(0, 245, 255, 0.2);
       transition: all 0.3s;
       cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease both;
     }
+    
+    .skill-card:nth-child(1) { animation-delay: 0.1s; }
+    .skill-card:nth-child(2) { animation-delay: 0.2s; }
+    .skill-card:nth-child(3) { animation-delay: 0.3s; }
+    .skill-card:nth-child(4) { animation-delay: 0.4s; }
+    .skill-card:nth-child(5) { animation-delay: 0.5s; }
+    .skill-card:nth-child(6) { animation-delay: 0.6s; }
+    .skill-card:nth-child(7) { animation-delay: 0.7s; }
+    .skill-card:nth-child(8) { animation-delay: 0.8s; }
+    .skill-card:nth-child(9) { animation-delay: 0.9s; }
+    .skill-card:nth-child(10) { animation-delay: 1.0s; }
+    .skill-card:nth-child(11) { animation-delay: 1.1s; }
+    .skill-card:nth-child(12) { animation-delay: 1.2s; }
     
     .skill-card:hover {
       transform: translateY(-5px);
@@ -464,7 +586,30 @@
       transform: translateY(-3px);
     }
     
-    .contact-grid {
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .project-link {
+      color: var(--accent-1);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent-1);
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+    
+    .project-link:hover {
+      background: var(--accent-1);
+      color: var(--bg-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+    }
+    
+    .contact-info {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
@@ -538,6 +683,56 @@
       box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
     }
     
+    .footer {
+      background: var(--bg-card);
+      padding: 2rem 2rem 1rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(0, 245, 255, 0.1);
+    }
+    
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-text p {
+      color: var(--text-dim);
+      margin: 0;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-1);
+    }
+    
+    .resume-btn {
+      background: var(--accent-1);
+      color: var(--bg-dark) !important;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .resume-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+    }
+    
     @media (max-width: 1024px) {
       .hero-text h1 { font-size: 3rem; }
       .skills-showcase { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
@@ -553,6 +748,8 @@
         right: auto; 
       }
       .nav-links { gap: 1rem; font-size: 0.9rem; }
+      .contact-info { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
     }
     
     @media (max-width: 640px) {
@@ -568,6 +765,8 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Page scroll progress"></div>
   <nav class="nav">
     <div class="nav-content">
       <div class="logo">PN</div>
@@ -577,21 +776,27 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
     </div>
   </nav>
 
-  <section id="home" class="hero">
+  <main id="main-content">
+  <section id="home" class="hero" role="banner">
     <div class="hero-bg"></div>
     <div class="hero-content">
       <div class="hero-text">
         <h1>Prajwal N.A</h1>
         <div class="role-wrapper">
-          <div class="role">AI/ML Engineer<br>Data Scientist<br>Software Developer<br>AI/ML Engineer</div>
+          <span class="role" id="role-text"></span>
+          <span class="cursor">|</span>
         </div>
         <p>Electronics & Communication Engineer with a minor in Computer Science, specializing in AI, ML, Data Science, and Software Development. Turning Data Into Scalable Solutions.</p>
         <div class="cta-group">
           <a href="#projects" class="btn btn-primary">View Projects</a>
           <a href="#contact" class="btn btn-outline">Let's Connect</a>
+          <a href="https://drive.google.com/file/d/1_-fEn-XWKFbVTTNvID0weDHALaGEE_iq/view?usp=sharing" download="Prajwal_NA_Resume.pdf" class="btn btn-secondary">Download Resume</a>
         </div>
         
         <div class="skills-showcase">
@@ -670,7 +875,7 @@
       <div class="timeline-item">
         <div class="timeline-content">
           <div class="timeline-date">April 2025 - July 2025</div>
-          <h3 class="timeline-title">Software Engineer Intern</h3>
+          <h3 class="timeline-title">Software Developer Engineer Intern</h3>
           <div class="timeline-company">EQUILIBRATE Pvt. Ltd</div>
           <p class="timeline-desc">Architected an AI chatbot using LangChain, Gemini, and LLaMA. Implemented RAG system reducing hallucinations by 40%. Integrated MongoDB Atlas with vector indexing for semantic search.</p>
         </div>
@@ -706,7 +911,7 @@
       <div class="timeline-item">
         <div class="timeline-content">
           <div class="timeline-date">January 2024 - April 2024</div>
-          <h3 class="timeline-title">Software Development Intern (AI/ML & Robotics)</h3>
+          <h3 class="timeline-title">Software Developer Engineer Intern (AI/ML & Robotics)</h3>
           <div class="timeline-company">Emage Soft Pvt Ltd</div>
           <p class="timeline-desc">Enhanced mapping accuracy by 35% via LIDAR-IMU fusion and Hector SLAM tuning; validated with 98% precision on KITTI.</p>
         </div>
@@ -730,6 +935,10 @@
             <span class="tech-badge">ML</span>
             <span class="tech-badge">spaCy</span>
           </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalna/resume-analyzer" class="project-link" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://resume-analyzer-demo.com" class="project-link" target="_blank" rel="noopener">Live Demo</a>
+          </div>
         </div>
       </div>
       
@@ -743,6 +952,10 @@
             <span class="tech-badge">Audio ML</span>
             <span class="tech-badge">NLP</span>
           </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalna/talk2code" class="project-link" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://talk2code-demo.com" class="project-link" target="_blank" rel="noopener">Live Demo</a>
+          </div>
         </div>
       </div>
     </div>
@@ -753,7 +966,7 @@
       <h2 class="section-title">Get In Touch</h2>
       <p class="section-subtitle">Ready to collaborate on innovative projects? Let's connect!</p>
     </div>
-    <div class="contact-grid">
+    <div class="contact-info">
       <div class="contact-card">
         <div class="contact-icon">📧</div>
         <div class="contact-label">Email</div>
@@ -769,6 +982,19 @@
       </div>
     </div>
   </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-text">
+        <p>&copy; 2026 Prajwal N.A. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/prajwal-tech" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+        <a href="https://www.linkedin.com/in/prajwal-nagesh-512028217/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  </main>
 
   <script>
     const observerOptions = {
@@ -793,23 +1019,78 @@
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const navHeight = document.querySelector('.nav').offsetHeight;
+          const targetPosition = target.offsetTop - navHeight - 20;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
       });
     });
     
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('.nav');
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const bgColor = isLight ? 'rgba(248, 250, 252, 0.95)' : 'rgba(10, 14, 39, 0.95)';
+      const bgColorDefault = isLight ? 'rgba(248, 250, 252, 0.9)' : 'rgba(10, 14, 39, 0.9)';
       if (window.scrollY > 100) {
-        nav.style.background = 'rgba(10, 14, 39, 0.95)';
+        nav.style.background = bgColor;
         nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
       } else {
-        nav.style.background = 'rgba(10, 14, 39, 0.9)';
+        nav.style.background = bgColorDefault;
         nav.style.boxShadow = 'none';
       }
+      
+      // Update scroll progress
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
     });
+    
+    // Theme toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+    
+    // Typing effect
+    const roles = ['AI/ML Engineer', 'Software Developer', 'Tech Innovator'];
+    let roleIndex = 0;
+    let charIndex = 0;
+    const roleText = document.getElementById('role-text');
+    
+    function typeWriter() {
+      if (charIndex < roles[roleIndex].length) {
+        roleText.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 100);
+      } else {
+        setTimeout(eraseText, 2000);
+      }
+    }
+    
+    function eraseText() {
+      if (charIndex > 0) {
+        roleText.textContent = roles[roleIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(eraseText, 50);
+      } else {
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeWriter, 500);
+      }
+    }
+    
+    setTimeout(typeWriter, 1000);
   </script>
 </body>
 </html>
-
-
