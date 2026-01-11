@@ -1648,7 +1648,7 @@
         <button class="chat-close" id="chat-close" aria-label="Close chat">&times;</button>
       </div>
       <div class="chat-messages" id="chat-messages">
-        <div class="message bot">Hi! I'm Prajwal's AI assistant. Ask me anything about his portfolio, experience, or projects!</div>
+        <div class="message bot" id="initial-message"></div>
       </div>
       <div class="chat-input">
         <input type="text" id="chat-input" placeholder="Type your message..." />
@@ -2048,7 +2048,11 @@
 
     // Toggle chat window
     chatToggle.addEventListener('click', () => {
+      const isOpening = !chatWindow.classList.contains('open');
       chatWindow.classList.toggle('open');
+      if (isOpening) {
+        typeMessage("Hello there! I am NEXA AI assistant.", document.getElementById('initial-message'));
+      }
     });
 
     chatClose.addEventListener('click', () => {
@@ -2071,6 +2075,19 @@
       }, 500);
     }
 
+    // Typing effect function
+    function typeMessage(text, element) {
+      let index = 0;
+      element.textContent = '';
+      const interval = setInterval(() => {
+        element.textContent += text[index];
+        index++;
+        if (index >= text.length) {
+          clearInterval(interval);
+        }
+      }, 50); // Adjust speed here
+    }
+
     // Add message to chat
     function addMessage(text, type) {
       const messageDiv = document.createElement('div');
@@ -2085,9 +2102,9 @@
       const lowerMessage = message.toLowerCase();
 
       if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-        return "Hello! I'm Prajwal's AI assistant. How can I help you today?";
+        return "Hello! I'm Prajwal's AI assistant my name is NEXA. How can I help you today?";
       } else if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you')) {
-        return "I am Prajwal's AI assistant, connecting him to the world through intelligent conversations. I'm here to help you learn about his portfolio, experience, and projects!";
+        return "I am NEXA Prajwal's AI assistant, connecting him to the world through intelligent conversations. I'm here to help you learn about his portfolio, experience, and projects!";
       } else if (lowerMessage.includes('prajwal') || lowerMessage.includes('about you') || lowerMessage.includes('tell me about')) {
         return "Prajwal N.A is an AI/ML Engineer & Software Developer with a B.Tech in Electronics & Communication Engineering and a minor in Computer Science. He specializes in building scalable, data-driven systems using Python, with expertise in Machine Learning, AI, TensorFlow, PyTorch, NLP, and more. He has completed 6 internships and 15 projects, focusing on AI solutions across various industries.";
       } else if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
