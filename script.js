@@ -135,7 +135,7 @@
     // ============================================================================
     // TYPING ANIMATION
     // ============================================================================
-    const roles = ['AI/ML Engineer', 'Software Developer', 'Tech Innovator'];
+    const roles = ['AI/ML Engineer', 'Software Engineer', 'Tech Innovator'];
     let roleIndex = 0;
     let charIndex = 0;
     let isTyping = false;
@@ -449,9 +449,9 @@
       } else if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you')) {
         return "I am NEXA Prajwal's AI assistant, connecting him to the world through intelligent conversations. I'm here to help you learn about his portfolio, experience, and projects!";
       } else if (lowerMessage.includes('prajwal') || lowerMessage.includes('about you') || lowerMessage.includes('tell me about')) {
-        return "Prajwal N.A is an AI/ML Engineer & Software Developer with a B.Tech in Electronics & Communication Engineering and a minor in Computer Science. He specializes in building scalable, data-driven systems using Python, with expertise in Machine Learning, AI, TensorFlow, PyTorch, NLP, and more. He has completed 6 internships and 15 projects, focusing on AI solutions across various industries.";
+        return "Prajwal N.A is an AI/ML Engineer & Software Engineer with a B.Tech in Electronics & Communication Engineering and a minor in Computer Science. He specializes in building scalable, data-driven systems using Python, with expertise in Machine Learning, AI, TensorFlow, PyTorch, NLP, and more. He has completed 6 internships and 15 projects, focusing on AI solutions across various industries.";
       } else if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
-        return "Prajwal has experience as a Data Integration Engineer Intern at ClearTax and Software Developer Engineer Intern at EQUILIBRATE Pvt. Ltd, where he built AI chatbots and data pipelines.";
+        return "Prajwal has experience as a Data Integration Engineer Intern at ClearTax and Software Engineer Intern at EQUILIBRATE Pvt. Ltd, where he built AI chatbots and data pipelines.";
       } else if (lowerMessage.includes('project') || lowerMessage.includes('projects')) {
         return "Prajwal has completed 15 projects, including AI chatbots using LangChain and LLaMA, data integration pipelines, and various ML applications.";
       } else if (lowerMessage.includes('skill') || lowerMessage.includes('skills')) {
