@@ -8,21 +8,32 @@
         setTimeout(() => {
           loadingOverlay.style.display = 'none';
         }, 500);
-      }, 1000);
+      }, 800);
     });
 
     // ============================================================================
     // INTERSECTION OBSERVER FOR ANIMATIONS
     // ============================================================================
     const observerOptions = {
-      threshold: 0.2,
-      rootMargin: '0px 0px -100px 0px'
+      threshold: 0.15,
+      rootMargin: '0px 0px -80px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          // Add staggered animation for multiple elements
+          if (entry.target.classList.contains('project-card')) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+              if (!card.classList.contains('visible')) {
+                setTimeout(() => {
+                  card.classList.add('visible');
+                }, index * 150);
+              }
+            });
+          }
         }
       });
     }, observerOptions);
@@ -36,7 +47,7 @@
     // ============================================================================
     const animateCounter = (element, target) => {
       const start = parseInt(element.textContent);
-      const duration = 2000;
+      const duration = 2500;
       const step = (target - start) / (duration / 16);
       let current = start;
 
@@ -73,8 +84,11 @@
     // ============================================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || !document.querySelector(href)) return;
+        
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
           const navHeight = document.querySelector('.nav').offsetHeight;
           const targetPosition = target.offsetTop - navHeight - 20;
@@ -84,7 +98,7 @@
     });
 
     // ============================================================================
-    // SCROLL EVENT HANDLER
+    // SCROLL EVENT HANDLER WITH OPTIMIZATIONS
     // ============================================================================
     let ticking = false;
     const handleScroll = () => {
@@ -95,12 +109,17 @@
           const docHeight = document.documentElement.scrollHeight - window.innerHeight;
           const scrollPercent = (scrollTop / docHeight) * 100;
 
-          // Update scroll progress
-          document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+          // Update scroll progress with smooth animation
+          const progressBar = document.querySelector('.scroll-progress');
+          if (progressBar) {
+            progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+          }
 
-          // Update nav background
+          // Update nav background with enhanced effect
           if (scrollTop > 100) {
-            nav.classList.add('scrolled');
+            if (!nav.classList.contains('scrolled')) {
+              nav.classList.add('scrolled');
+            }
           } else {
             nav.classList.remove('scrolled');
           }
@@ -124,6 +143,10 @@
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', newTheme);
       themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+      themeIcon.style.animation = 'spin 0.6s ease';
+      setTimeout(() => {
+        themeIcon.style.animation = '';
+      }, 600);
       localStorage.setItem('theme', newTheme);
     });
 
@@ -154,12 +177,12 @@
         setTimeout(() => {
           isTyping = false;
           typeWriter();
-        }, 100);
+        }, 80);
       } else {
         setTimeout(() => {
           isTyping = false;
           eraseText();
-        }, 2000);
+        }, 2500);
       }
     }
 
@@ -173,19 +196,19 @@
         setTimeout(() => {
           isTyping = false;
           eraseText();
-        }, 50);
+        }, 40);
       } else {
         roleIndex = (roleIndex + 1) % roles.length;
         setTimeout(() => {
           isTyping = false;
           typeWriter();
-        }, 500);
+        }, 600);
       }
     }
 
     // Start typing animation after page loads
     window.addEventListener('load', () => {
-      setTimeout(typeWriter, 1000);
+      setTimeout(typeWriter, 600);
     });
 
     // ============================================================================
