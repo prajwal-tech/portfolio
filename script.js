@@ -158,7 +158,7 @@
     // ============================================================================
     // TYPING ANIMATION
     // ============================================================================
-    const roles = ['AI/ML Engineer', 'Software Engineer', 'Tech Innovator'];
+    const roles = ['AI/ML Engineer', 'Software Engineer', 'Forward Deployed Engineer'];
     let roleIndex = 0;
     let charIndex = 0;
     let isTyping = false;
@@ -484,7 +484,7 @@
       } else if (lowerMessage.includes('resume')) {
         return "You can download Prajwal's resume from the portfolio website.";
       } else if (lowerMessage.includes('github') || lowerMessage.includes('linkedin')) {
-        return "Check out Prajwal's GitHub at github.com/prajwal-tech and LinkedIn at linkedin.com/in/prajwal-nagesh-512028217.";
+        return "Check out Prajwal's GitHub at github.com/prajwal-tech and LinkedIn at linkedin.com/in/prajwalnagesh/.";
       } else {
         return "I'm here to help with information about Prajwal's portfolio. Feel free to ask about his experience, projects, skills, or how to contact him!";
       }
@@ -497,3 +497,45 @@
         sendMessage();
       }
     });
+
+    // ============================================================================
+    // RECRUITER TOOLS
+    // ============================================================================
+    const analyzeJobButton = document.getElementById('analyze-job');
+    const jobDescription = document.getElementById('job-description');
+    const demoOutput = document.getElementById('demo-output');
+    const skillKeywords = [
+      'python', 'javascript', 'sql', 'machine learning', 'deep learning', 'nlp',
+      'rag', 'llm', 'tensorflow', 'pytorch', 'scikit-learn', 'langchain',
+      'mongodb', 'postgresql', 'fastapi', 'django', 'docker', 'dbt', 'data engineering'
+    ];
+
+    function renderMatchReport() {
+      const description = jobDescription.value.trim().toLowerCase();
+      if (!description) {
+        demoOutput.innerHTML = '<div class="demo-placeholder"><span>!</span><p>Add a job description to generate a match report.</p></div>';
+        jobDescription.focus();
+        return;
+      }
+
+      const matchedSkills = skillKeywords.filter(skill => description.includes(skill));
+      const score = Math.min(96, Math.max(42, 42 + matchedSkills.length * 4));
+      const skillMarkup = matchedSkills.length
+        ? matchedSkills.map(skill => `<span class="tech-badge">${skill}</span>`).join('')
+        : '<span class="tech-badge">Add more role details</span>';
+
+      demoOutput.innerHTML = `
+        <div class="match-score"><div><strong>${score}%</strong><span> estimated role alignment</span></div><span>Local browser analysis</span></div>
+        <div class="match-bar" aria-label="Estimated role alignment"><span style="width: ${score}%"></span></div>
+        <p><strong>Relevant signals found</strong></p>
+        <div class="match-skills">${skillMarkup}</div>
+        <p class="demo-note">This lightweight demo mirrors the workflow behind a resume matching system. It does not upload or store your text.</p>
+      `;
+    }
+
+    if (analyzeJobButton && jobDescription && demoOutput) {
+      analyzeJobButton.addEventListener('click', renderMatchReport);
+      jobDescription.addEventListener('keydown', event => {
+        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') renderMatchReport();
+      });
+    }
