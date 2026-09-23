@@ -480,7 +480,7 @@
       } else if (lowerMessage.includes('skill') || lowerMessage.includes('skills')) {
         return "Prajwal specializes in Python, Machine Learning, AI, TensorFlow, PyTorch, NLP, LangChain, MongoDB, FastAPI, Django, and Docker.";
       } else if (lowerMessage.includes('contact') || lowerMessage.includes('email')) {
-        return "You can contact Prajwal at prajwalnagesh73@gmail.com or call +91 819 718 0393.";
+        return "You can contact Prajwal at prajwalnagesh73@gmail.com or call +918197180393 or +33768089614.";
       } else if (lowerMessage.includes('resume')) {
         return "You can download Prajwal's resume from the portfolio website.";
       } else if (lowerMessage.includes('github') || lowerMessage.includes('linkedin')) {
